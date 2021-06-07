@@ -1,8 +1,7 @@
 import { StorageBackend } from '@openid/appauth';
 import 'capacitor-secure-storage-plugin';
-import { Plugins } from '@capacitor/core';
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
 
-const { SecureStoragePlugin } = Plugins;
 
 // REQUIRES CAPACITOR PLUGINS
 // capacitor-secure-storage-plugin
@@ -12,7 +11,7 @@ export class CapacitorSecureStorage implements StorageBackend {
     if(!SecureStoragePlugin)
       throw new Error("Capacitor Secure Storage Is Undefined!");
 
-    let returned = await SecureStoragePlugin.get({ key: name })
+    const returned = await SecureStoragePlugin.get({ key: name })
                                     .catch(() => { return  { value: null } });
     return returned.value;
   }  
